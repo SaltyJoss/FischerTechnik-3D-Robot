@@ -8,34 +8,34 @@
   
   ## RobotController
   
-  ### ControllerUI
+  ### CLASS: ControllerUI
     - JFrame UI class
     - Extends and Imports JFrame for graphical window
     - Custom buttons to controll the robot
     - throws controllerExceptions
     - Parent to the 'motorname' subclasses
       
-      motorTT
+    CLASS: motorTT
       - subclass of ControllerUI
       - deals with the TT motor (base rotation)
       
-      motorZ
+    CLASS: motorZ
       - subclass of ControllerUI
       - deals with the Z motor (vertical movement)
       
-      motorARM
+    CLASS: motorARM
       - subclass of ControllerUI
       - deals with the ARM motor (horizontal movement)
       
-      motorGRIP
+    CLASS: motorGRIP
       - subclass of ControllerUI
       - deals with the GRIP motor (pincer movemement
     
-  ### portArduino
+  ### CLASS: portArduino
     - Driver class
     - ports to arduino
     - runs obj UI
     
-  ### controllerExceptions
+  ### CLASS: controllerExceptions
     - Parent class to the exceptions for UI-Specific, and Port-specific
     - extends Exceptions
