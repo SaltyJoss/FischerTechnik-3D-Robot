@@ -14,22 +14,22 @@
 - Custom buttons to controll the robot
 - throws controllerExceptions
 - Parent to the 'motorname' subclasses
-
-##### motorTT
-- subclass of ControllerUI
-- deals with the TT motor (base rotation)
-
-##### motorZ
-- subclass of ControllerUI
-- deals with the Z motor (vertical movement)
-
-##### motorARM
-- subclass of ControllerUI
-- deals with the ARM motor (horizontal movement)
-
-##### motorGRIP
-- subclass of ControllerUI
-- deals with the GRIP motor (pincer movemement
+  
+  #### motorTT
+  - subclass of ControllerUI
+  - deals with the TT motor (base rotation)
+  
+  #### motorZ
+  - subclass of ControllerUI
+  - deals with the Z motor (vertical movement)
+  
+  #### motorARM
+  - subclass of ControllerUI
+  - deals with the ARM motor (horizontal movement)
+  
+  #### motorGRIP
+  - subclass of ControllerUI
+  - deals with the GRIP motor (pincer movemement
 
 ### portArduino
 - Driver class
