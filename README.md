@@ -15,7 +15,7 @@
 - throws controllerExceptions
 - Parent to the 'motorname' subclasses
 
-### motorTT
+#### motorTT
 - subclass of ControllerUI
 - deals with the TT motor (base rotation)
 
