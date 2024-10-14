@@ -75,7 +75,7 @@ public class controllerUI extends JPanel {
         upBtn.addMouseListener(new MouseAdapter() {				// adds mouseListener to button
             @Override											// Overrides the 
             public void mousePressed(MouseEvent e) {			// mousePressed with param of MouseEvent (variable e)
-                main.portConnection(0, 1, 0, 0);				// uses UI's portConnection method to update param for arduino
+                main.portConnection(0, 2, 0, 0);				// uses UI's portConnection method to update param for arduino
             }
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -87,7 +87,7 @@ public class controllerUI extends JPanel {
         downBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                main.portConnection(0, 2, 0, 0);
+                main.portConnection(0, 1, 0, 0);
             }
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -98,7 +98,7 @@ public class controllerUI extends JPanel {
         gripBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-            	main.portConnection(0, 0, 0, 1);
+            	main.portConnection(0, 0, 0, 2);
             }
             public void mouseReleased(MouseEvent e) {
             	main.portConnection(0, 0, 0, 0);
@@ -107,8 +107,7 @@ public class controllerUI extends JPanel {
         releaseBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-            	main.portConnection(0, 0, 0, 2
-            			);
+            	main.portConnection(0, 0, 0, 1);
             }
             public void mouseReleased(MouseEvent e) {
             	main.portConnection(0, 0, 0, 0);
@@ -144,7 +143,7 @@ public class controllerUI extends JPanel {
         leftBaseBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                main.portConnection(1, 0, 0, 0);
+                main.portConnection(2, 0, 0, 0);
             }
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -156,7 +155,7 @@ public class controllerUI extends JPanel {
         rightBaseBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                main.portConnection(2, 0, 0, 0);
+                main.portConnection(1, 0, 0, 0);
             }
             @Override
             public void mouseReleased(MouseEvent e) {
