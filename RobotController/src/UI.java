@@ -167,6 +167,9 @@ public class UI extends JFrame {
 			} else if (Grip == 1) { // using the param of the method to talk to the arduino
 				comPort.getOutputStream().write('7'); // char characters easiest to pass
 				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);
+			} else if (Grip == 2) { // using the param of the method to talk to the arduino
+				comPort.getOutputStream().write('8'); // char characters easiest to pass
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);
 			}
 		} catch(Exception e) {
 		}

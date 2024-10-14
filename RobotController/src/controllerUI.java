@@ -25,6 +25,7 @@ public class controllerUI extends JPanel {
 	private Button rightBaseBtn = new Button("BASE RIGHT");
 	private Button resetBtn = new Button("RESET");
 	private Button menuBtn = new Button("MENU");
+	private Button releaseBtn = new Button("DROP");
 	
 	// dial objects
 	Dial baseDial = new Dial();
@@ -94,12 +95,26 @@ public class controllerUI extends JPanel {
             }
         });
         // MouseListener for Grip Button (Gripper)
-        gripBtn.addActionListener(new ActionListener() {
+        gripBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
             	main.portConnection(0, 0, 0, 1);
             }
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
+            }
         });
+        releaseBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 2
+            			);
+            }
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
+            }
+        });
+        
 
         // MouseListener for Left Button (Arm)
         leftBtn.addMouseListener(new MouseAdapter() {
@@ -177,11 +192,12 @@ public class controllerUI extends JPanel {
 		downBtn.setBounds(200, 265, 50, 50);
 		leftBtn.setBounds(135, 200, 50, 50);
 		rightBtn.setBounds(265, 200, 50, 50);
-		leftBaseBtn.setBounds(485, 200, 75, 50);
+		leftBaseBtn.setBounds(460, 200, 75, 50);
 		rightBaseBtn.setBounds(615, 200, 75, 50);
 		gripBtn.setBounds(200, 200, 50, 50);
 		resetBtn.setBounds(650, 10, 75, 25);
 		menuBtn.setBounds(565, 10, 75, 25);
+		releaseBtn.setBounds(550, 200, 50, 50);
 		
 		// disables the button outline
 		upBtn.setFocusable(false);
@@ -193,6 +209,7 @@ public class controllerUI extends JPanel {
 		gripBtn.setFocusable(false);
 		resetBtn.setFocusable(false);
 		menuBtn.setFocusable(false);
+		releaseBtn.setFocusable(false);
 		
 		// adds all the buttons to panel UI
 		add(upBtn);
@@ -204,6 +221,7 @@ public class controllerUI extends JPanel {
 		add(rightBaseBtn);
 		add(resetBtn);
 		add(menuBtn);
+		add(releaseBtn);
 		
 		// calling buttonPress() method
 		btnResize(upBtn);		// puts the wanted specific btn to be applied to the method
@@ -215,6 +233,7 @@ public class controllerUI extends JPanel {
 		btnResize(gripBtn);
 		btnResize(resetBtn);
 		btnResize(menuBtn);
+		btnResize(releaseBtn);
 		
 		// allocated button to go back to original menu
 		addActionListeners(main);
