@@ -21,6 +21,8 @@ public class controllerUI extends JPanel {
 	private Button gripBtn = new Button("GRAB");
 	private Button leftBtn = new Button("LEFT");
 	private Button rightBtn = new Button("RIGHT");
+	private Button leftBaseBtn = new Button("BASE LEFT");
+	private Button rightBaseBtn = new Button("BASE RIGHT");
 	private Button resetBtn = new Button("RESET");
 	private Button menuBtn = new Button("MENU");
 	
@@ -57,59 +59,98 @@ public class controllerUI extends JPanel {
 			}
 		});
 	}
+	/**
+	 * addActionListeners method to listen for different actions
+	 * 
+	 * #includes mousePressed,mosueReleased,actionPerformed
+	 * 
+	 * Helpful way to organise the large amount of functions needed for the motors
+	 *
+	 * 
+	 * @param main
+	 */
 	private void addActionListeners(UI main) {
-        // Action Listener for Up Button
-        upBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                main.portConnection(1, 0, 0, 0);
-                System.out.println("Value: " + main.setBase());
+        // MouseListener for Up Button (Z - Vertical)
+        upBtn.addMouseListener(new MouseAdapter() {				// adds mouseListener to button
+            @Override											// Overrides the 
+            public void mousePressed(MouseEvent e) {			// mousePressed with param of MouseEvent (variable e)
+                main.portConnection(0, 1, 0, 0);				// uses UI's portConnection method to update param for arduino
             }
             @Override
             public void mouseReleased(MouseEvent e) {
             	main.portConnection(0, 0, 0, 0);
-            	System.out.println("Value: " + main.setBase());
             }
         });
 
-        // Action Listener for Down Button
-        downBtn.addActionListener(new ActionListener() {
+        // MouseListener for Down Button (Z - Vertical)
+        downBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Down Button Pressed");
-                // Add functionality for DOWN action
+            public void mousePressed(MouseEvent e) {
+                main.portConnection(0, 2, 0, 0);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
             }
         });
-
-        // Action Listener for Grip Button
+        // MouseListener for Grip Button (Gripper)
         gripBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Grip Button Pressed");
-                // Add functionality for GRAB action
+            	main.portConnection(0, 0, 0, 1);
             }
         });
 
-        // Action Listener for Left Button
-        leftBtn.addActionListener(new ActionListener() {
+        // MouseListener for Left Button (Arm)
+        leftBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Left Button Pressed");
-                // Add functionality for LEFT action
+            public void mousePressed(MouseEvent e) {
+                main.portConnection(0, 0, 1, 0);
             }
-        });
-
-        // Action Listener for Right Button
-        rightBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Right Button Pressed");
-                // Add functionality for RIGHT action
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
             }
         });
 
-        // Action Listener for Reset Button
-        resetBtn.addActionListener(new ActionListener() {
+        // MouseListener for Right Button (Arm)
+        rightBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                main.portConnection(0, 0, 2, 0);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
+            }
+        });
+        
+        // MouseListener for Left Base Button (TT)
+        leftBaseBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                main.portConnection(1, 0, 0, 0);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
+            }
+        });
+
+        // MouseListener for Right Base Button (TT)
+        rightBaseBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                main.portConnection(2, 0, 0, 0);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            	main.portConnection(0, 0, 0, 0);
+            }
+        });
+
+        // Action Listener for Reset Button (UI specific)
+        resetBtn.addActionListener(new ActionListener() { // plan is to have this button reset robot to middle
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Reset Button Pressed");
@@ -136,6 +177,8 @@ public class controllerUI extends JPanel {
 		downBtn.setBounds(200, 265, 50, 50);
 		leftBtn.setBounds(135, 200, 50, 50);
 		rightBtn.setBounds(265, 200, 50, 50);
+		leftBaseBtn.setBounds(485, 200, 75, 50);
+		rightBaseBtn.setBounds(615, 200, 75, 50);
 		gripBtn.setBounds(200, 200, 50, 50);
 		resetBtn.setBounds(650, 10, 75, 25);
 		menuBtn.setBounds(565, 10, 75, 25);
@@ -145,6 +188,8 @@ public class controllerUI extends JPanel {
 		downBtn.setFocusable(false);
 		leftBtn.setFocusable(false);
 		rightBtn.setFocusable(false);
+		leftBaseBtn.setFocusable(false);
+		rightBaseBtn.setFocusable(false);
 		gripBtn.setFocusable(false);
 		resetBtn.setFocusable(false);
 		menuBtn.setFocusable(false);
@@ -155,6 +200,8 @@ public class controllerUI extends JPanel {
 		add(gripBtn);
 		add(leftBtn);
 		add(rightBtn);
+		add(leftBaseBtn);
+		add(rightBaseBtn);
 		add(resetBtn);
 		add(menuBtn);
 		
@@ -163,6 +210,8 @@ public class controllerUI extends JPanel {
 		btnResize(downBtn);
 		btnResize(leftBtn);
 		btnResize(rightBtn);
+		btnResize(leftBaseBtn);
+		btnResize(rightBaseBtn);
 		btnResize(gripBtn);
 		btnResize(resetBtn);
 		btnResize(menuBtn);

@@ -7,7 +7,7 @@ public class arduinoPort {
 	public static void main(String[] args) {
 		UI main = new UI();
 		
-		main.portConnection(0,0,0,0);
+		main.portIdentify();
     }
 
 }

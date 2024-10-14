@@ -16,9 +16,10 @@ import javax.swing.JPanel;
 import com.fazecast.jSerialComm.SerialPort;
 
 public class UI extends JFrame {
-	public int motorBase=0;
+	public int TT, Z, Arm, Grip;
 	
 	public SerialPort[] ports = SerialPort.getCommPorts();
+    public SerialPort comPort = ports[0]; // Change the index based on available ports
     
 	
 	// variables
@@ -54,14 +55,6 @@ public class UI extends JFrame {
 			}
 		});
 	}
-	// getter for int base
-	public void getBase(int base) {
-		this.motorBase = base;
-	}
-	// setter for char base
-	public int setBase() {
-		return motorBase;
-	}
 	/**
 	 * buttonPress method to listen when a button is pressed
 	 * 
@@ -88,13 +81,16 @@ public class UI extends JFrame {
 			}
 		});
 	}
-	/*
-	 * Method for connection to arduino Port
+	/**
+	 * method to indentify and connect to port
 	 * 
+	 * uses portConnection() method to deal with motor input
+	 * 
+	 * focuses on the port connection and Exceptions
 	 * 
 	 */
-	void portConnection(int TT, int Z, int Arm, int Grip) {
-        // Print the number of available ports
+	public void portIdentify() {
+		// Print the number of available ports
         System.out.println("Number of available ports: " + ports.length);
         
         // Check if there are any ports available
@@ -102,9 +98,8 @@ public class UI extends JFrame {
             System.out.println("No serial ports found.");
             return; // Exit if no ports are found
         }
-
+        
         // Select a port safely
-        SerialPort comPort = ports[0]; // Change the index based on available ports
         System.out.println("Using port: " + comPort.getSystemPortName());
 
         // Set parameters for the serial port
@@ -113,32 +108,69 @@ public class UI extends JFrame {
 
         // Attempt to open the port
         if (comPort.openPort()) {
-            System.out.println("Port opened successfully.");
+            System.out.println("Port opened successfully."); // gives info port is opened
             try {
-            	setBase();
-                if (TT == 1) {
-	                comPort.getOutputStream().write('1');
-	                System.out.println(TT);
-                } else {
-	                // Example: Turn off the LED
-	                comPort.getOutputStream().write('0');
-	                System.out.println(motorBase + 1);
-                }
+               portConnection(TT,Z,Arm,Grip);
             } catch (Exception e) {
                 System.err.println("Error during communication: " + e.getMessage());
                 e.printStackTrace();
             } finally {
-            	frame.addWindowListener(new java.awt.event.WindowAdapter() {
+                frame.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                    public void windowClosing(java.awt.event.WindowEvent windowEvent) { // wanted the exit of the port to be inLine with user exiting
                     	comPort.closePort();
                         System.out.println("Port closed.");
                     }
                 });
             }
+                
         } else {
             System.err.println("Failed to open port: " + comPort.getLastErrorLocation());
         }
+	}
+	
+	/*
+	 * Method for outputting data to arduino
+	 * 
+	 * focuses on what button pressed and why
+	 */
+	void portConnection(int TT, int Z, int Arm, int Grip) {
+		this.TT = TT;
+		this.Z = Z;
+		this.Arm = Arm;
+		this.Grip = Grip;
+        
+		try {
+			if (TT == 0 && Z == 0 & Arm == 0 & Grip == 0) {
+				comPort.getOutputStream().write('0');
+			} else if (TT == 1) { // using the param of the method to talk to the arduino
+				comPort.getOutputStream().write('1'); // char characters easiest to pass
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip); // debugging output
+			} else if (TT == 2){
+				// Example: Turn off the LED
+				comPort.getOutputStream().write('2');
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);  
+			} else if (Z == 1) { // using the param of the method to talk to the arduino
+				comPort.getOutputStream().write('3'); // char characters easiest to pass
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);
+			} else if (Z == 2){
+				// Example: Turn off the LED
+				comPort.getOutputStream().write('4');
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);  
+			} else if (Arm == 1) { // using the param of the method to talk to the arduino
+				comPort.getOutputStream().write('5'); // char characters easiest to pass
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);
+			} else if (Arm == 2){
+				// Example: Turn off the LED
+				comPort.getOutputStream().write('6');
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);  
+			} else if (Grip == 1) { // using the param of the method to talk to the arduino
+				comPort.getOutputStream().write('7'); // char characters easiest to pass
+				System.out.println("Values (int,int,int,int): " + TT + ", " + Z + ", " + Arm + ", " + Grip);
+			}
+		} catch(Exception e) {
+		}
+	      
 	}
 	// method to set the frame exception
 	public void setFrmeException(Exception e) {
@@ -232,7 +264,7 @@ public class UI extends JFrame {
 		panelContainer.add(controlPanel, "Control Panel");
 		panelContainer.add(advancedPanel, "Advanced Panel");
 		
-		// setup main
+		// setup main called to finish rest of setup
 		setupMain();
 	}
 }
