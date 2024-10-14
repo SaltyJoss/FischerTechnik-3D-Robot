@@ -1,41 +1,38 @@
 # FischerTechnik-3D-Robot
 
-  ## Robot_Function
+  ## Robot_Function - C++
   
   ### MOTOR_FUNCTION
     - Contains the robots functions, each motor (TT, Z, ARM, GRIP)
-    - 
+    - allocates them a variable to the corresponding pin
+    - uses the whole relay to take advantage of going opposite ways
+    - utilising back skills from C++ / C to code this part
+    - basic functions for now, looking into more complex ideas
   
-  ## RobotController
+  ## RobotController - JAVA
   
-  ### CLASS: ControllerUI
-    - JFrame UI class
-    - Extends and Imports JFrame for graphical window
-    - Custom buttons to controll the robot
-    - throws controllerExceptions
-    - Parent to the 'motorname' subclasses
-      
-    CLASS: motorTT
-      - subclass of ControllerUI
-      - deals with the TT motor (base rotation)
-      
-    CLASS: motorZ
-      - subclass of ControllerUI
-      - deals with the Z motor (vertical movement)
-      
-    CLASS: motorARM
-      - subclass of ControllerUI
-      - deals with the ARM motor (horizontal movement)
-      
-    CLASS: motorGRIP
-      - subclass of ControllerUI
-      - deals with the GRIP motor (pincer movemement
+  ### CLASS: UI
+    - main class
+    - deals with JFrame creation and menu page
+    - deals with porting to arduino - Using the library: com.fazecast.jSerialComm
+    - deals with outputting to arduino
+    - contains important methods used elsewhere
+    
+  ### CLASS: controllerUI
+    - subClass
+    - extends JPanel
+    - deals with data of the motors movements (0,0,0,0) was the easiest way for me to read it
+    - helps get correct data to output to arduino
+    - uses cardLayout from UI class to create an easy button system on the UI
+    - deals with UI of the whole control Panel page
     
   ### CLASS: portArduino
     - Driver class
     - ports to arduino
-    - runs obj UI
+    - has obj UI
+    - runs the method portIdentify()
     
   ### CLASS: controllerExceptions
     - Parent class to the exceptions for UI-Specific, and Port-specific
     - extends Exceptions
+    - precauctionary
